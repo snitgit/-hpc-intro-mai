@@ -1,0 +1,83 @@
+To demonstrate, let's use `module list`. `module list` shows all loaded
+software modules.
+
+```
+{{ site.remote.prompt }} module list
+```
+{: .language-bash}
+
+```
+Currently Loaded Modules:
+  1) python3
+
+tungmay@k8smaster1:~/.workshop$ module av
+
+--------------------------------------------------------------- /shared/software/modules --------------------------------------
+   anaconda3                      nvhpc-nompi/21.9                      (D)    parabricks/3.8.0-1.ampere        (D)    rstudio_singularity/3.6.2 (D)
+   nvhpc/21.9              (D)    parabricks/3.7.0-1.ampere-EXPIRE             python3                          (L)
+   nvhpc-byo-compiler/21.9 (D)    parabricks/3.7.0-1.ampere-extra-tools        rstudio_singularity/not-test-yet
+
+----------------------------------------------------- /shared/software/software/hpc-sdk/modulefiles ---------------------------
+   nvhpc/21.9    nvhpc-byo-compiler/21.9    nvhpc-nompi/21.9
+
+  Where:
+   L:  Module is loaded
+   D:  Default Module
+
+Use "module spider" to find all possible modules.
+Use "module keyword key1 key2 ..." to search for all possible modules matching any of the "keys".
+
+
+```
+{: .output}
+
+```
+{{ site.remote.prompt }} module load parabricks/3.8.0-1.ampere
+{{ site.remote.prompt }} module list
+```
+{: .language-bash}
+
+```
+Currently Loaded Modules:
+  1) python3   2) parabricks/3.8.0-1.ampere
+
+```
+{: .output}
+
+So in this case, loading the `parabricks` module (genomic analysis applications
+), also loaded `python3`  as well. Let's
+try unloading the `parabricks` package.
+
+```
+{{ site.remote.prompt }} module unload parabricks/3.8.0-1.ampere
+{{ site.remote.prompt }} module list
+```
+{: .language-bash}
+
+```
+
+Currently Loaded Modules:
+  1) python3
+
+
+```
+{: .output}
+
+So using `module unload` "un-loads" a module along with its dependencies. If we
+wanted to unload everything at once, we could run `module purge` (unloads
+everything).
+
+```
+{{ site.remote.prompt }} module purge
+```
+{: .language-bash}
+
+```
+No modules loaded
+
+```
+{: .output}
+
+Note that `module purge` is informative. It lets us know that all but a default
+set of packages have been unloaded (and how to actually unload these if we
+truly so desired).
